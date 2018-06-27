@@ -23,9 +23,9 @@ class NullPiece < Piece
   end
 end
 
-require_relative 'queen'
-require_relative 'king'
-require_relative 'bishop'
-require_relative 'rook'
-require_relative 'knight'
-require_relative 'pawn'
+require_relative './Pieces/queen'
+require_relative './Pieces/king'
+require_relative './Pieces/bishop'
+require_relative './Pieces/rook'
+require_relative './Pieces/knight'
+require_relative './Pieces/pawn'
