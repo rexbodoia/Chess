@@ -13,8 +13,9 @@ class Game
   def play
     while true
       puts "make a move"
-      display.cursor.get_input
       display.render
+      display.cursor.get_input
+      system("clear")
     end
   end
 end

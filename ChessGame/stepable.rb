@@ -1,25 +1,16 @@
 module StepablePiece
     def moves
       result = []
-      move_dirs.each do |dir|
-        (1..7).to_a.each do |num|
-          new_pos = grow_unblocked_moves_in_dir(dir[0] * num, dir[1] * num)
-          result << new_pos if valid_move?(new_pos)
-        end
+      move_diffs.each do |dif|
+        new_pos = grow_unblocked_moves_in_dir(dif[0], dif[1])
+        result << new_pos if valid_pos?(new_pos)
       end
       result
     end
 
-    def valid_move?(pos)
-      (0..7).to_a.include?(pos[0]) && (0..7).to_a.include?(pos[1])
-    end
-
-    def diagonal_dirs
-      [[1,1], [1,-1], [-1,1], [-1,-1]]
-    end
-
-    def horizontal_dirs
-      [[0,1], [1,0], [0,-1], [-1,0]]
+    def valid_pos?(pos)
+      return false unless (0..7).to_a.include?(pos[0]) && (0..7).to_a.include?(pos[1])
+      board[pos].is_a?(NullPiece)
     end
 
     def grow_unblocked_moves_in_dir(dx, dy)

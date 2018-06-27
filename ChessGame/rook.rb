@@ -1,6 +1,6 @@
 require_relative 'piece'
 
-class  Bishop < Piece
+class  Rook < Piece
 include SlideablePiece
 
   def initialize(board, pos, color)
@@ -8,8 +8,8 @@ include SlideablePiece
   end
 
   def move_dirs
-    diagonal_dirs
+    horizontal_dirs
   end
 
-  POSITIONS = [[0,2], [0,5], [7,2], [7, 5]]
+  POSITIONS = [[0,0], [0, 7], [7,0], [7,7]]
 end

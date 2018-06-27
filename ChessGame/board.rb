@@ -4,17 +4,16 @@ class Board
   attr_accessor :grid
 
   def initialize
-    grid = Array.new(8) { Array.new(8) }
+    grid = Array.new(8) { Array.new(8) { NullPiece.instance } }
     @grid = grid
-    grid.each_index do |i|
-      grid[i].each_index do |j|
-        if i > 1 && i < 6
-          add_piece(NullPiece.instance, [i, j])
-        else
-          add_piece(Piece.new, [i, j])
+    grid.each_index do |row|
+      if [1,6].include?(row)
+        grid.each_index do |col|
+          self[[row, col]] = Pawn.new(self, [row, col], :color)
         end
       end
     end
+     add_pieces
   end
 
   def []=(pos, val)
@@ -27,8 +26,13 @@ class Board
     grid[x][y]
   end
 
-  def add_piece(piece, pos)
-    self[pos] = piece
+  def add_pieces
+    pieces = [King, Queen, Knight, Rook, Bishop]
+    pieces.each do |piece|
+      piece::POSITIONS.each do |pos|
+        self[pos] = piece.new(self, pos, :color)
+      end
+    end
   end
 
   def move_piece(start_pos, end_pos)
@@ -45,5 +49,9 @@ class Board
 
   def inspect
     p
+  end
+
+  def populate_board()
+
   end
 end
